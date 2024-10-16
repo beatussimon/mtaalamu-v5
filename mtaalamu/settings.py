@@ -1,15 +1,11 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-from decouple import config
 
-load_dotenv()
-import firebase_admin
-from firebase_admin import credentials
 
-# Load Firebase service account credentials
-cred = credentials.Certificate('config/firebase_service_account.json')
-firebase_admin.initialize_app(cred)
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,13 +22,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Email Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')  # Use environment variable
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')  # Use environment variable
 
 # Media files
 MEDIA_URL = '/media/'

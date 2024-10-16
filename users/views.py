@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from firebase_admin import auth
+
 from .forms import SignUpForm, LoginForm
 from .models import CustomUser
 from django.core.mail import send_mail
