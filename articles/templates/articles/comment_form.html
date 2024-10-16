@@ -1,0 +1,5 @@
+<form method="POST" action="{% url 'articles:reply_comment' parent_comment.pk %}">
+    {% csrf_token %}
+    <textarea name="content" required></textarea>
+    <button type="submit">Reply</button>
+</form>

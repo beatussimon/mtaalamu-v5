@@ -1,0 +1,19 @@
+<!-- users/templates/users/activation_invalid.html -->
+
+{% extends 'users/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">{% blocktrans %}Activation Link Invalid{% endblocktrans %}</h1>
+            <p class="card-text">
+                {% blocktrans %}The activation link you used is invalid or has expired.{% endblocktrans %}
+            </p>
+            <a href="{% url 'users:signup' %}" class="btn btn-secondary">
+                {% blocktrans %}Back to Signup{% endblocktrans %}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

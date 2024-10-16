@@ -1,0 +1,21 @@
+{% extends 'users/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">{% blocktrans %}Activate Your Account{% endblocktrans %}</h1>
+            <p class="card-text">
+                Hi {{ user.username }},
+            </p>
+            <p class="card-text">
+                {% blocktrans %}Please activate your account by clicking the link below:{% endblocktrans %}
+            </p>
+            <a href="http://{{ domain }}{% url 'users:activate' uidb64=uid token=token %}" class="btn btn-primary">
+                {% blocktrans %}Activate Account{% endblocktrans %}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

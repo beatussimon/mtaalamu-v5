@@ -1,0 +1,19 @@
+{% for reply in replies %}
+    <div class="nested-comment">
+        <p><strong>{{ reply.author.username }}:</strong> {{ reply.content }}</p>
+
+        <!-- Nested reply button and form -->
+        <button class="btn btn-link" data-toggle="collapse" data-target="#reply-form-{{ reply.id }}">Reply</button>
+        <div id="reply-form-{{ reply.id }}" class="collapse">
+            <form method="POST">
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <input type="hidden" name="parent_id" value="{{ reply.id }}">  <!-- Attach nested reply -->
+                <button type="submit" class="btn btn-success btn-sm">Reply</button>
+            </form>
+        </div>
+
+        <!-- Recursive call for deeper nested replies -->
+        {% include 'articles/replies.html' with replies=reply.replies.all %}
+    </div>
+{% endfor %}

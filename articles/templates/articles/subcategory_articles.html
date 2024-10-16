@@ -1,0 +1,28 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="mt-4">Articles in <strong>{{ subcategory.name }}</strong></h2>
+        <div class="row">
+            {% for article in articles %}
+                <div class="col-md-3"> <!-- 4 articles in a row -->
+                    <div class="card mb-4 hover-effect"> <!-- Added hover-effect class -->
+                        <a href="{% url 'articles:article_detail' article.id %}" style="text-decoration: none;">
+                            {% if article.image %} <!-- Check if there is an image -->
+                                <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ article.title }}</h5>
+                                <p class="card-text">{{ article.content|truncatewords:20 }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-warning">No articles found in this subcategory.</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

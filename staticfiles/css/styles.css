@@ -1,0 +1,74 @@
+/* styles.css */
+
+footer {
+    background-color: #343a40; /* Dark background */
+    color: #ffffff; /* White text */
+    padding: 20px 0; /* Vertical padding */
+    font-family: Arial, sans-serif; /* Font family */
+}
+
+.footer-content {
+    display: flex; /* Use Flexbox for layout */
+    justify-content: space-between; /* Space between elements */
+    align-items: center; /* Center vertically */
+    max-width: 1200px; /* Max width for larger screens */
+    margin: 0 auto; /* Center footer */
+    padding: 0 20px; /* Side padding */
+}
+
+.footer-content p {
+    margin: 0; /* Remove default margin */
+}
+
+.footer-links {
+    flex-grow: 1; /* Allow links to take available space */
+}
+
+.footer-links ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    display: flex; /* Display links inline */
+    justify-content: center; /* Center links */
+}
+
+.footer-links li {
+    margin: 0 15px; /* Space between links */
+}
+
+.footer-links a {
+    color: #ffffff; /* White text color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Transition for hover effect */
+}
+
+.footer-links a:hover {
+    color: #ffc107; /* Yellow on hover */
+}
+
+.social-media {
+    display: flex; /* Flexbox for social icons */
+}
+
+.social-media a {
+    color: #ffffff; /* White color for icons */
+    font-size: 24px; /* Size of icons */
+    margin-left: 15px; /* Space between icons */
+    transition: color 0.3s; /* Transition for hover effect */
+}
+
+.social-media a:hover {
+    color: #ffc107; /* Yellow on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Stack items on small screens */
+        align-items: center; /* Center items */
+    }
+
+    .footer-links {
+        margin: 10px 0; /* Margin for links */
+    }
+}

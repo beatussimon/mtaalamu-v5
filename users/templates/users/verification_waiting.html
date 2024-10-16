@@ -1,0 +1,13 @@
+<!-- users/templates/users/verification_waiting.html -->
+{% extends 'users/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Verification Pending</h2>
+    <p class="text-center">Please check your email <strong>{{ email }}</strong> for a verification link.</p>
+    <p class="text-center">If you don't see it, please check your spam folder.</p>
+    <div class="text-center mt-4">
+        <a href="{% url 'users:login' %}" class="btn btn-primary">Go to Login</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Edit Comment{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-4">Edit Comment</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Update Comment</button>
+        <a href="{% url 'articles:article_detail' comment.article.pk %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

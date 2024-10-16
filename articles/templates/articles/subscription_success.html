@@ -1,0 +1,89 @@
+<!-- templates/articles/subscription_success.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Successful</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+            font-family: 'Arial', sans-serif; /* Clean font */
+            height: 100vh; /* Full viewport height */
+            display: flex; /* Flexbox for centering */
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+            margin: 0; /* Remove default margin */
+        }
+        .success-container {
+            max-width: 400px; /* Limit width for smaller screens */
+            padding: 2rem; /* Padding for content */
+            background-color: #ffffff; /* White background for the message */
+            border-radius: 0.5rem; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            text-align: center; /* Center text */
+        }
+        h1 {
+            color: #28a745; /* Success color */
+            font-size: 2rem; /* Responsive heading size */
+            margin-bottom: 1rem; /* Space below the header */
+        }
+        p {
+            font-size: 1rem; /* Standard paragraph size */
+            color: #555; /* Darker gray for secondary text */
+            margin-bottom: 2rem; /* Space below the paragraph */
+        }
+        .btn {
+            padding: 0.75rem 1.5rem; /* Padding for buttons */
+            font-size: 1rem; /* Consistent button font size */
+            border-radius: 0.3rem; /* Rounded button corners */
+            margin: 0.5rem; /* Uniform margin for buttons */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Ensure the anchor behaves like a button */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Primary button color */
+            border: none; /* Remove border */
+            color: #ffffff; /* White text */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+        .btn-outline-secondary {
+            color: #007bff; /* Outline button color */
+            border: 2px solid #007bff; /* Outline border */
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+        }
+        /* Hover effects */
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+        .btn-outline-secondary:hover {
+            background-color: #007bff; /* Blue background on hover */
+            color: #ffffff; /* White text on hover */
+        }
+        /* Responsive styles */
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 1.5rem; /* Smaller heading for small screens */
+            }
+            p {
+                font-size: 0.9rem; /* Smaller paragraph text */
+            }
+            .btn {
+                width: 100%; /* Full-width buttons on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <h1>Subscription Successful!</h1>
+        <p>Thank you for subscribing! You will start receiving updates soon.</p>
+        <div>
+            <a href="{% url 'articles:article_list' %}" class="btn btn-primary">Back to Articles</a>
+        </div>
+    </div>
+</body>
+</html>

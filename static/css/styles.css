@@ -1,0 +1,107 @@
+footer {
+    background-color: #1a1a1a; /* Dark background */
+    color: #ffffff; /* White text */
+    padding: 40px 10px; /* Increased vertical padding for a larger footer */
+    font-family: 'Arial', sans-serif; /* Font family */
+    text-align: left; /* Align text to the left */
+}
+
+.footer-content {
+    display: flex; /* Use Flexbox for layout */
+    justify-content: space-between; /* Space between elements */
+    align-items: flex-start; /* Align items to the start */
+    max-width: 1200px; /* Max width for larger screens */
+    margin: 0 auto; /* Center footer */
+    flex-wrap: wrap; /* Wrap items on small screens */
+}
+
+.footer-about,
+.contact-info,
+.quick-links,
+.social-media {
+    flex: 1 1 200px; /* Flex-grow, flex-shrink, flex-basis for responsive sizes */
+    margin: 10px; /* Uniform margin for spacing */
+    min-width: 150px; /* Minimum width for sections */
+}
+
+.footer-about h3,
+.contact-info h3,
+.quick-links h3,
+.social-media h3 {
+    margin-bottom: 5px; /* Reduced space below headers */
+    font-size: 20px; /* Slightly larger header size for better visibility */
+}
+
+.footer-about p,
+.contact-info p {
+    font-size: 15px; /* Increased font size for paragraphs */
+    margin: 0; /* Remove margin */
+}
+
+.quick-links ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+.quick-links li {
+    margin: 5px 0; /* Space between list items */
+}
+
+.quick-links a {
+    color: #ffffff; /* White color for links */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Transition for hover effect */
+}
+
+.quick-links a:hover {
+    color: #007bff; /* Change to your project's bluish color on hover */
+}
+
+.social-media {
+    display: flex; /* Flexbox for social icons */
+    flex-direction: column; /* Stack the title and icons vertically */
+    align-items: center; /* Center items horizontally */
+    margin-top: 10px; /* Add some space above social media section */
+}
+
+.social-links {
+    display: flex; /* Flexbox for social icons */
+    justify-content: center; /* Center icons */
+    align-items: center; /* Center vertically */
+}
+
+.social-links a {
+    color: #ffffff; /* White color for icons */
+    font-size: 20px; /* Slightly larger size for icons */
+    margin: 0 5px; /* Uniform space between icons */
+    display: flex; /* Flexbox for icon and text */
+    align-items: center; /* Center text with icon */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Transition for hover effect */
+}
+
+.social-links a:hover {
+    color: #007bff; /* Change to your project's bluish color on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Stack items on small screens */
+        align-items: center; /* Center items */
+        text-align: center; /* Center text for all sections */
+    }
+
+    .footer-about,
+    .contact-info,
+    .quick-links,
+    .social-media {
+        margin: 10px 0; /* Uniform vertical margin for links */
+        text-align: center; /* Center text */
+    }
+
+    .social-links {
+        justify-content: center; /* Center icons horizontally */
+    }
+}

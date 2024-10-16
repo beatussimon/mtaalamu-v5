@@ -1,0 +1,106 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+    <div class="container my-4">
+        <h1 class="text-center">Search Results for "{{ query }}"</h1>
+
+        {% if articles %}
+            <div class="row">
+                {% for article in articles %}
+                <div class="col-md-3 mb-4"> <!-- 4 columns in one row -->
+                    <a href="{% url 'articles:article_detail' article.id %}" class="text-decoration-none text-dark"> <!-- Make the entire card clickable -->
+                        <div class="card h-100 shadow-sm hover-effect border-light">
+                            <!-- Display the article image if available -->
+                            {% if article.image %}
+                                <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}" style="height: 120px; object-fit: cover;"> <!-- Reduced image height -->
+                            {% else %}
+                                <img src="{% static 'images/placeholder.jpg' %}" class="card-img-top" alt="No Image Available" style="height: 120px; object-fit: cover;"> <!-- Reduced height for placeholder -->
+                            {% endif %}
+                            
+                            <div class="card-body p-2"> <!-- Reduced padding for card body -->
+                                <h5 class="card-title" style="font-size: 1.1em;">{{ article.title }}</h5> <!-- Slightly reduced title font size -->
+                                <p class="card-text" style="font-size: 0.85em;">{{ article.content|truncatewords:10 }}</p> <!-- Further truncated to 10 words -->
+                            </div>
+                            
+                            <div class="card-footer text-muted" style="font-size: 0.75em; padding: 0.3rem;"> <!-- Reduced padding and font size -->
+                                <small>By {{ article.author }} on {{ article.created_at|date:"M d, Y" }}</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination controls -->
+            <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
+                <ul class="pagination">
+                    <!-- First Page Link -->
+                    <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+                        <a class="page-link" href="?page=1&q={{ query }}" aria-label="First">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <!-- Previous Page Link -->
+                    <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+                        <a class="page-link" href="?page={% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% else %}1{% endif %}&q={{ query }}" aria-label="Previous">
+                            <span aria-hidden="true">&lsaquo;</span>
+                        </a>
+                    </li>
+
+                    <!-- Current Page -->
+                    <li class="page-item active">
+                        <span class="page-link">{{ page_obj.number }}</span>
+                    </li>
+
+                    <!-- Next Page Link -->
+                    <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                        <a class="page-link" href="?page={% if page_obj.has_next %}{{ page_obj.next_page_number }}{% else %}{{ page_obj.paginator.num_pages }}{% endif %}&q={{ query }}" aria-label="Next">
+                            <span aria-hidden="true">&rsaquo;</span>
+                        </a>
+                    </li>
+
+                    <!-- Last Page Link -->
+                    <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&q={{ query }}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        {% else %}
+            <div class="alert alert-warning text-center" role="alert">
+                <p>No articles found for your search query.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <style>
+        /* CSS for hover effect */
+        .hover-effect {
+            transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition */
+        }
+
+        .hover-effect:hover {
+            transform: translateY(-5px); /* Slight upward movement */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow effect */
+        }
+
+        /* Additional styles to enhance UI */
+        .card {
+            border-radius: 8px; /* Rounded corners for the card */
+        }
+
+        .card-title {
+            font-weight: bold; /* Bold title for better readability */
+        }
+
+        .card-text {
+            color: #555; /* Slightly muted color for the text */
+        }
+    </style>
+{% endblock %}

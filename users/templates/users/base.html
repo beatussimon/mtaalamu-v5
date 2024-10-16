@@ -1,0 +1,354 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mtaalamu - Your go-to news source for world events.">
+    <meta property="og:title" content="Mtaalamu - News Source">
+    <meta property="og:description" content="Stay updated with the latest news in various fields.">
+    <meta property="og:image" content="https://source.unsplash.com/1600x400/?news,media">
+    <meta property="og:url" content="http://yourwebsite.com">
+    <title>{% block title %}Mtaalamu{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMp5Z5w5Ml06G1L6Z3h3F5A4c9M9VZC7UFRy5N4" crossorigin="anonymous">
+
+
+     <!-- Favicon for all browsers -->
+     <link rel="icon" href="{% static 'favicons/favicon.ico' %}" type="image/x-icon">
+    
+     <!-- Favicon for other sizes -->
+     <link rel="icon" href="{% static 'favicons/favicon-16x16.png' %}" sizes="16x16" type="image/png">
+     <link rel="icon" href="{% static 'favicons/favicon-32x32.png' %}" sizes="32x32" type="image/png">
+     
+     <!-- Apple Touch Icon -->
+     <link rel="apple-touch-icon" href="{% static 'favicons/apple-touch-icon.png' %}">
+     
+     <!-- Android Chrome Icons -->
+     <link rel="icon" href="{% static 'favicons/android-chrome-192x192.png' %}" sizes="192x192" type="image/png">
+     <link rel="icon" href="{% static 'favicons/android-chrome-512x512.png' %}" sizes="512x512" type="image/png">
+ 
+     <!-- Other head elements -->
+     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding-top: 70px; /* Ensure space for fixed navbar */
+            transition: padding-top 0.3s;
+        }
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #333;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        .nav-link {
+            color: #555;
+            margin-left: 15px;
+            transition: color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .dropdown-menu {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            position: absolute; /* Make it appear on top */
+            display: none; /* Initially hidden */
+            z-index: 1000; /* Ensure it appears on top of other content */
+        }
+        .nav-item {
+            position: relative; /* Set position relative for absolute positioning of dropdown */
+        }
+        .nav-item:hover .dropdown-menu {
+            display: block; /* Show on hover */
+            left: 0; /* Align the dropdown with the left of the parent */
+            top: 100%; /* Position below the nav item */
+        }
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
+        .hero {
+            background-image: url('https://source.unsplash.com/1600x400/?news,media');
+            background-size: cover;
+            background-position: center;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin: 0;
+        }
+        .content-area {
+            padding: 20px;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px; /* Hidden off-screen */
+            width: 250px;
+            height: 100%;
+            background: #3498db; /* Changed sidebar color */
+            color: white; /* Text color */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+            transition: left 0.3s ease;
+            z-index: 1001;
+        }
+        .sidebar.active {
+            left: 0; /* Show sidebar */
+        }
+        .sidebar-header {
+            padding: 20px;
+            background: #2980b9; /* Darker shade for header */
+            color: white;
+            text-align: center;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar li {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .sidebar a {
+            text-decoration: none;
+            color: #fff; /* Link color in sidebar */
+        }
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, 0.2); /* Hover effect */
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 2em;
+            }
+            .hero h1 {
+                font-size: 1.2em;
+            }
+        }
+        .circle-icon {
+            width: 40px; /* Adjust size as needed */
+            height: 40px; /* Adjust size as needed */
+            border-radius: 50%;
+            background-color: #3498db; /* Main color */
+            color: white; /* Text color */
+            font-size: 16px; /* Font size */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-left: 10px;
+            border: 2px solid #fff; /* Border color */
+        }
+        .circle-icon span {
+            font-size: 18px; /* Adjust span size */
+        }
+        
+
+
+
+
+
+        /* Search container styling */
+        #search-container {
+            margin: 30px auto; /* Center the container */
+            display: none;
+        }
+        
+        /* Input field styling */
+        #search-container input {
+            width: 80%; /* Adjust width */
+            padding: 8px; /* Inner padding */
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 4px; /* Slightly rounded corners */
+            background-color: #ffffff; /* White background */
+            color: #333; /* Dark gray text color */
+            box-shadow: none; /* Remove any shadow for a flat look */
+        }
+        
+        /* Button styling */
+        .btn-outline-primary {
+            padding: 8px 12px; /* Comfortable padding */
+            margin-left: 10px; /* Space between input and button */
+            background-color: #007bff; /* Bluish background */
+            color: #ffffff; /* White text color */
+            border: none; /* No border */
+            border-radius: 4px; /* Slightly rounded corners */
+            transition: background-color 0.3s ease; /* Smooth transition for hover effects */
+        }
+        
+        /* Button hover effects */
+        .btn-outline-primary:hover {
+            background-color: #0056b3; /* Darker bluish background on hover */
+            color: #ffffff; /* White text color on hover */
+        }
+        
+
+
+
+
+
+
+        
+    </style>
+</head>
+<body>
+    <header id="navbar">
+        <nav class="navbar navbar-expand-lg navbar-light container">
+            <a class="navbar-brand" href="{% url 'articles:article_list' %}">Mtaalamu</a>
+            <button class="navbar-toggler sidebar-toggle" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" onclick="toggleSidebar()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link {% if request.resolver_match.view_name == 'article_list' %}active{% endif %}" href="{% url 'articles:article_list' %}">Home</a></li>
+                    {% for category in categories %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == '/category/'|add:category.name|add:'/' %}active{% endif %}" href="{% url 'articles:category_articles' category.name %}">{{ category.name }}</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {% for subcategory in category.subcategories.all %}
+                                    <a class="dropdown-item" href="{% url 'articles:subcategory_articles' subcategory.name %}">{{ subcategory.name }}</a>
+                                {% endfor %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link search-icon" href="#" onclick="toggleSearch()" aria-label="Toggle search">
+                            <i class="fas fa-search"></i>
+                        </a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'users:logout' %}">Logout</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'articles:profile' %}">
+                                <div class="circle-icon" aria-label="User initials">
+                                    <span>{{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}</span>
+                                </div>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'users:login' %}">Login</a></li>
+
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>Meet the Experts</h1>
+    </div>
+    <div class="content-area container">
+        <div id="search-container" class="text-center">
+            <form action="{% url 'articles:search_articles' %}" method="GET" class="form-inline">
+                <input type="text" name="q" placeholder="Search articles..." class="form-control" aria-label="Search">
+                <button type="submit" class="btn btn-outline-primary">Search</button>
+            </form>
+        </div>
+    
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+
+
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>About Us</h3>
+                <p>Connecting you with expert insights and knowledge.</p>
+            </div>
+            
+            <div class="contact-info">
+                <h3>Contact Us</h3>
+                <p>info@mtaalamu.com</p>
+            </div>
+    
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home Articles Home</a></li>
+                </ul>
+            </div>
+    
+            <div class="social-media">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://twitter.com/_bsans" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/_bsans" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@_bsans" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.youtube.com/bsans47" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                </div>
+                
+            </div>
+        </div>
+    </footer>
+    
+    
+    
+    
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Categories</h2>
+            <button class="close-btn" onclick="toggleSidebar()">×</button>
+        </div>
+        <ul>
+            {% for category in categories %}
+                <li><a href="{% url 'articles:category_articles' category.name %}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        function toggleSearch() {
+            var searchContainer = document.getElementById('search-container');
+            if (searchContainer.style.display === "none" || searchContainer.style.display === "") {
+                searchContainer.style.display = "block";
+            } else {
+                searchContainer.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
