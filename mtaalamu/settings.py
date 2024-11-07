@@ -4,6 +4,9 @@ from pathlib import Path
 
 
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://mtaalamu-v5-1.onrender.com',
+]
 
 
 
