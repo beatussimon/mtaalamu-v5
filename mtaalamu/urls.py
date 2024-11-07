@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('articles/', include('articles.urls')),  # Assuming articles URLs are included here
+    path('', include('articles.urls')),  # Assuming articles URLs are included here
     path('users/', include('users.urls')),  # Assuming users URLs are included here
 
     # Add the following line for the login view
