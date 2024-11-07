@@ -20,9 +20,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'default-secret-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'mtaalamu-v5-1.onrender.com'
-]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mtaalamu-v5-1.onrender.com']
+
 
 
 # Media files
